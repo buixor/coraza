@@ -4,10 +4,12 @@
 package types
 
 import (
+	"bytes"
 	"io"
+	"os"
 
 	"github.com/corazawaf/coraza/v3/debuglog"
-	"github.com/corazawaf/coraza/v3/internal/corazawaf"
+	//"github.com/corazawaf/coraza/v3/internal/corazawaf"
 )
 
 // Transaction is created from a WAF instance to handle web requests and responses,
@@ -200,6 +202,6 @@ type Transaction interface {
 	//Extra binding
 	RemoveRuleByID(int)
 
-	GetBodyBuffer() *corazawaf.BodyBuffer
-	SetBodyBuffer(*corazawaf.BodyBuffer)
+	GetBodyBuffer() (BodyBufferOptions, *bytes.Buffer, *os.File, int64)
+	SetBodyBuffer(options BodyBufferOptions, buffer *bytes.Buffer, writer *os.File, length int64)
 }

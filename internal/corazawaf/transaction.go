@@ -5,12 +5,14 @@ package corazawaf
 
 import (
 	"bufio"
+	"bytes"
 	"errors"
 	"fmt"
 	"io"
 	"math"
 	"mime"
 	"net/url"
+	"os"
 	"path/filepath"
 	"strconv"
 	"strings"
@@ -116,12 +118,21 @@ type Transaction struct {
 	transformationCache map[transformationKey]*transformationValue
 }
 
-func (tx *Transaction) GetBodyBuffer() *BodyBuffer {
-	return tx.requestBodyBuffer
+/*
+options types.BodyBufferOptions
+buffer  *bytes.Buffer
+writer  *os.File
+length  int64
+*/
+func (tx *Transaction) GetBodyBuffer() (types.BodyBufferOptions, *bytes.Buffer, *os.File, int64) {
+	return tx.requestBodyBuffer.options, tx.requestBodyBuffer.buffer, tx.requestBodyBuffer.writer, tx.requestBodyBuffer.length
 }
 
-func (tx *Transaction) SetBodyBuffer(b *BodyBuffer) {
-	tx.responseBodyBuffer = b
+func (tx *Transaction) SetBodyBuffer(options types.BodyBufferOptions, buffer *bytes.Buffer, writer *os.File, length int64) {
+	tx.responseBodyBuffer.options = options
+	tx.responseBodyBuffer.buffer = buffer
+	tx.responseBodyBuffer.writer = writer
+	tx.responseBodyBuffer.length = length
 }
 
 func (tx *Transaction) ID() string {
