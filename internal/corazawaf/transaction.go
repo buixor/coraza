@@ -282,6 +282,10 @@ func (tx *Transaction) Interrupt(interruption *types.Interruption) {
 	}
 }
 
+func (tx *Transaction) SwitchWAFEngine(new *WAF) {
+	tx.WAF = new
+}
+
 func (tx *Transaction) DebugLogger() debuglog.Logger {
 	return tx.debugLogger
 }

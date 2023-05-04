@@ -7,6 +7,7 @@ import (
 	"io"
 
 	"github.com/corazawaf/coraza/v3/debuglog"
+	"github.com/corazawaf/coraza/v3/internal/corazawaf"
 )
 
 // Transaction is created from a WAF instance to handle web requests and responses,
@@ -198,4 +199,6 @@ type Transaction interface {
 
 	//Extra binding
 	RemoveRuleByID(int)
+
+	SwitchWAFEngine(*corazawaf.WAF)
 }
