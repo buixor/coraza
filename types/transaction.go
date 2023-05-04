@@ -195,4 +195,7 @@ type Transaction interface {
 
 	// Closer closes the transaction and releases any resources associated with it such as request/response bodies.
 	io.Closer
+
+	//Extra binding
+	RemoveRuleByID(int)
 }
