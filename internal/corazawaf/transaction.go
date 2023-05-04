@@ -116,6 +116,14 @@ type Transaction struct {
 	transformationCache map[transformationKey]*transformationValue
 }
 
+func (tx *Transaction) GetBodyBuffer() *BodyBuffer {
+	return tx.requestBodyBuffer
+}
+
+func (tx *Transaction) SetBodyBuffer(b *BodyBuffer) {
+	tx.responseBodyBuffer = b
+}
+
 func (tx *Transaction) ID() string {
 	return tx.id
 }
@@ -280,10 +288,6 @@ func (tx *Transaction) Interrupt(interruption *types.Interruption) {
 	if tx.RuleEngine == types.RuleEngineOn {
 		tx.interruption = interruption
 	}
-}
-
-func (tx *Transaction) SwitchWAFEngine(new *WAF) {
-	tx.WAF = new
 }
 
 func (tx *Transaction) DebugLogger() debuglog.Logger {

@@ -200,5 +200,6 @@ type Transaction interface {
 	//Extra binding
 	RemoveRuleByID(int)
 
-	SwitchWAFEngine(*corazawaf.WAF)
+	GetBodyBuffer() *corazawaf.BodyBuffer
+	SetBodyBuffer(*corazawaf.BodyBuffer)
 }
