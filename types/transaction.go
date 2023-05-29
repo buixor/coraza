@@ -197,5 +197,5 @@ type Transaction interface {
 	io.Closer
 
 	//Extra binding
-	RemoveRuleByID(int)
+	//RemoveRuleByID(int)
 }
